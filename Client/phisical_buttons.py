@@ -79,28 +79,28 @@ while True:
     if is_connected == True:
         if GPIO.input(17) == False:
             print("Button 17 pressed")
-            mqttc.publish(MQTT_TOPIC, json.dumps({"button": "17"}))
+            mqttc.publish(MQTT_TOPIC, json.dumps({"button": "good"}))
             time.sleep(3)
         if GPIO.input(27) == False:
             print("Button 27 pressed")
-            mqttc.publish(MQTT_TOPIC, json.dumps({"button": "27"}))
+            mqttc.publish(MQTT_TOPIC, json.dumps({"button": "neutral"}))
             time.sleep(3)
         if GPIO.input(22) == False:
             print("Button 22 pressed")
-            mqttc.publish(MQTT_TOPIC, json.dumps({"button": "22"}))
+            mqttc.publish(MQTT_TOPIC, json.dumps({"button": "bad"}))
             time.sleep(3)
     
     elif is_connected == False:
         if GPIO.input(17) == False:
             print("Button 17 pressed")
-            offline_survey_collection.append(json.dumps({"button":"17"}))
+            offline_survey_collection.append(json.dumps({"button":"good"}))
             print(offline_survey_collection)
             time.sleep(3)
         if GPIO.input(27) == False:
             print("Button 27 pressed")
-            offline_survey_collection.append(json.dumps({"button":"27"}))
+            offline_survey_collection.append(json.dumps({"button":"neutral"}))
             time.sleep(3)
         if GPIO.input(22) == False:
             print("Button 22 pressed")
-            offline_survey_collection.append(json.dumps({"button":"22"}))
+            offline_survey_collection.append(json.dumps({"button":"bad"}))
             time.sleep(3)
