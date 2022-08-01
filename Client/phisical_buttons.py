@@ -2,6 +2,9 @@ import paho.mqtt.client as mqtt
 import RPi.GPIO as GPIO
 import time
 import json
+from getmac import get_mac_address
+from datetime import datetime
+from requests import get
 
 # MQTT
 MQTT_HOST = "raspberrypiaidbroker"
@@ -50,8 +53,28 @@ mqttc.connect(MQTT_HOST, MQTT_PORT, MQTT_KEEPALIVE_INTERVAL)
 # MQTT loop
 mqttc.loop_start()
 
-# GPIO loop
+#location
+def get_location(device_id):
+    mac_address = device_id
+    url = "http://raspberrypiaidbroker:8000/devices/{}/location".format(mac_address)
+    location = get(url).text[1:-1]#need to remove the first and last character '" "'
+    return location
+#Post Survey
+def post_survey(survey):
+    payload={}
+    payload['satisfaction']=survey
+    payload['deviceId'] = get_mac_address()
+    payload['insertedAt'] = datetime.now().isoformat()
+    payload['location'] = get_location(get_mac_address())
+    
+    
+    payload = json.dumps(payload)
+    if is_connected:
+        mqttc.publish(MQTT_TOPIC, payload)
+    else:
+        offline_survey_collection.append(survey)
 
+# GPIO loop
 while True:
     if is_connected == True:
         if GPIO.input(17) == False:
