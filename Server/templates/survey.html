@@ -1,0 +1,91 @@
+
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+  </head>
+  <body>
+    <style>
+      .wrapper {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        height: 100vh;
+        background: #e3f5db;
+      }
+
+      .btn-wrapper {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 40px;
+      }
+
+      form {
+        margin-top: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      form .comment {
+        background: #E4F5DA;
+        box-shadow: inset -6px -3px 5px rgba(255, 255, 255, 0.750601), inset 3px 6px 6px #C3D7E7, inset 4px 2px 6px #B1C5D5, inset 0px 2px 4px #C8D4E2;
+        border-radius: 17.9491px;
+        border: none;
+        height: 100px;
+        width: 300px;
+        padding: 12px;
+      }
+
+      .satisfaction-button {
+        margin-right: 30px;
+        width: 130px;
+        height: 130px;
+        border-radius: 18px;
+        background: #E4F5DA;
+        border: none;
+        box-shadow: -11px -11px 20px rgba(255, 255, 255, 0.272044), -8px -40px 22px rgba(246, 251, 255, 0.384288), -8px 0px 8px rgba(244, 248, 251, 0.50254), 19px 21px 50px rgba(176, 195, 210, 0.727846);
+
+      }
+    </style>
+    <div class="wrapper">
+      <h3>Leave us your feedback!</h3>
+      <form action="/satisfactions/{{device.deviceId}}" method="post">
+        <input type="hidden" name="satisfaction" id="satisfaction">
+        <input type="hidden" name="time" id="time">
+        <textarea placeholder="leave a comment for us" name="comment" class="comment" ></textarea>
+      </form>
+      <div class="btn-wrapper">
+        <button class="satisfaction-button">happy</button>
+        <button class="satisfaction-button">neutral</button>
+        <button class="satisfaction-button">sad</button>
+      </div>
+    </div>
+<script>
+  // grab all buttons with the class .satisfaction-button
+  const buttons = Array.from(document.querySelectorAll('.satisfaction-button'))
+  const satisfactionInput = document.getElementById('satisfaction');
+  const time = document.getElementById('time');
+  // loop over all buttons
+  buttons.forEach((aButton) => {
+    // for each button when clicked
+    // grab the button text
+    // put it inside the form input with the name satisfaction
+    // submit the form manually
+    aButton.onclick = function() {
+      satisfactionInput.value = this.textContent.toLocaleLowerCase();
+      time.value = new Date().toISOString();
+      satisfactionInput.form.submit();
+    }
+  })
+</script>
+  </body>
+</html>

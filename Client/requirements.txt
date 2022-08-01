@@ -1,0 +1,3 @@
+get-mac
+paho-mqtt
+RPi.GPIO
