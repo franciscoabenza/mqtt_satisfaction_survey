@@ -1,0 +1,10 @@
+Flask
+mariadb
+get-mac
+sqlmodel
+fastapi
+uvicorn #server
+pymysql
+python-multipart
+fastapi-mqtt
+Jinja2

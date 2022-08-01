@@ -1,0 +1,35 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script> 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js"></script></head>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+
+    
+  </head>
+  <body>
+    <div class="container mt-5">
+      <h1>Device details</h1>
+      
+    </div>
+    <div id="chart"></div>
+    <script type="text/javascript">
+      var satisfactions = {{ satisfactions | safe }};
+      // these xAxis values represent the 3 different satisfaction values 
+      const xAxis = ['happy', 'neutral', 'sad'];
+      var data = [{
+        x: xAxis,
+        y: xAxis.map(x => satisfactions.filter(s => s.satisfaction === x).length),
+        type: 'bar'
+        }
+      ];
+      Plotly.plot('chart', data);
+  </script>
+  </body>
+</html>

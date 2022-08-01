@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+
+    
+  </head>
+  <body>
+    <div class="container mt-5">
+      <h1>List of Devices</h1>
+      <ul class="list-group">
+        {% for device in devices %}
+      
+
+        <li class="list-group-item hover">
+            <a href={{'devices/'+device.deviceId}} ><h3>{{device.deviceId}}</h3></a>
+            <label for="fname">specify new location:</label>
+           <form method="post" action='devices/{{device.deviceId}}'>
+              <input name="location" />
+              <input type="submit" />
+           </form>
+           
+          <p>location: {{ device.location}}</p>
+        </li>
+
+        {% endfor %}
+      </ul>
+    </div>
+    <script>
+
+    </script>
+  </body>
+</html>
