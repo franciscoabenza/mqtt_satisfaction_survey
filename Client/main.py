@@ -68,7 +68,8 @@ def get_created_devices():
 def create_device():
     created_devices = get_created_devices()
     if mac_address in created_devices: #Check if this device is already in the server
-        pass
+        global last_available_location
+        last_available_location = get_location(mac_address)
     else:
         MQTT_TOPIC = "createDevice"
 
